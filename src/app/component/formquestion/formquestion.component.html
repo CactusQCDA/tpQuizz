@@ -6,6 +6,8 @@
     cancelText="Dismiss"
     [(ngModel)]="nbQuestion"
   >
+  <ion-select-option value="1">1</ion-select-option>
+  <ion-select-option value="2">2</ion-select-option>
     <ion-select-option value="5">5</ion-select-option>
     <ion-select-option value="6">6</ion-select-option>
     <ion-select-option value="7">7</ion-select-option>
@@ -28,8 +30,7 @@
   </ion-select>
 </ion-item>
 <ion-item>
-  <ion-button color="primary" (click)="onClick()"
-    >C'est parti mon KIKI !</ion-button
+  <ion-button color="primary" (click)="onClick()" expand="full">C'est parti mon KIKI !</ion-button
   >
 </ion-item>
-<ion-item *ngIf="locatScore"> Votre dernier score = {{ locatScore }} </ion-item>
+

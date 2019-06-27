@@ -11,29 +11,39 @@
   <div *ngIf="questionSelect">
     <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>{{ questionSelect.category }}</ion-card-subtitle>
-        <ion-card-title>{{ questionSelect.difficulty }}</ion-card-title>
+        <ion-card-subtitle color="{{ colorDiff }}"
+          ><p id="difficulty">
+            {{ questionSelect.difficulty }}
+          </p></ion-card-subtitle
+        >
+        <ion-card-title
+          ><p id="category">{{ questionSelect.category }}</p></ion-card-title
+        >
       </ion-card-header>
-      {{ questionSelect.question }}
-
+      <p id="idQuestion">Question n°{{ cptQuestion }}</p>
+      <p id="question">
+        {{ questionSelect.question }}
+      </p>
       <ion-list>
         <ion-radio-group [(ngModel)]="itemSelected">
           <ion-list-header>
-            <ion-label>question n°{{ idQuestion }} Réponse</ion-label>
+            <ion-label>Réponse</ion-label>
           </ion-list-header>
 
           <ion-item *ngFor="let proposition of propositions">
-            <ion-label>{{ proposition }}</ion-label>
-            <ion-radio slot="start" value="{{ proposition }}"></ion-radio>
+            <ion-label color="{{ colorReponse }}">{{ proposition }}</ion-label>
+            <ion-radio slot="start" value="{{ proposition }}" color="{{ colorReponse }}" (click)="selectionResponse()" disabled="{{ radioDisable }}" ></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>
 
       <ion-card-content>
         <ion-button color="primary" (click)="next()" *ngIf="!backButton"
-          >Next</ion-button>
-        <ion-button color="primary" [routerLink]="['/home']"  *ngIf="backButton"
-          >Retour</ion-button>
+          >Next</ion-button
+        >
+        <ion-button color="primary" [routerLink]="['/home']" *ngIf="backButton"
+          >Retour</ion-button
+        >
       </ion-card-content>
     </ion-card>
   </div>

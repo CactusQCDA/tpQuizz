@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  public localScore:string;
   public appPages = [
     {
       title: 'Home',
@@ -36,4 +37,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+
 }

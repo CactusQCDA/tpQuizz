@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>quizz</ion-title>
+    <ion-title>Quizz</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -32,7 +32,13 @@
 
           <ion-item *ngFor="let proposition of propositions">
             <ion-label color="{{ colorReponse }}">{{ proposition }}</ion-label>
-            <ion-radio slot="start" value="{{ proposition }}" color="{{ colorReponse }}" (click)="selectionResponse()" disabled="{{ radioDisable }}" ></ion-radio>
+            <ion-radio
+              slot="start"
+              value="{{ proposition }}"
+              color="{{ colorReponse }}"
+              (click)="selectionResponse()"
+              disabled="{{ radioDisable }}"
+            ></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>

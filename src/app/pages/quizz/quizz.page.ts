@@ -66,7 +66,7 @@ export class QuizzPage implements OnInit {
       this.propositions.push(this.questionSelect.correct_answer);
 
       // Mélange du tableau pour que cela soit plus fun
-      //this.shuffle(this.propositions);
+      this.shuffle(this.propositions);
 
       // Gère la couleur de l'affichage de la difficulté
       switch (this.questionSelect.difficulty) {

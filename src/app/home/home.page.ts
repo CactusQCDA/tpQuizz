@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  public locatScore: string;
+  constructor() {
+    this.locatScore = localStorage.getItem("score");
+  }
+  ionViewWillEnter(){
+    this.locatScore = localStorage.getItem("score");
+  }
 }

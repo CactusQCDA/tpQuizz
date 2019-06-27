@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>quizz</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="questionSelect">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{ questionSelect.category }}</ion-card-subtitle>
+        <ion-card-title>{{ questionSelect.difficulty }}</ion-card-title>
+      </ion-card-header>
+      {{ questionSelect.question }}
+
+      <ion-list>
+        <ion-radio-group [(ngModel)]="itemSelected">
+          <ion-list-header>
+            <ion-label>question n°{{ idQuestion }} Réponse</ion-label>
+          </ion-list-header>
+
+          <ion-item *ngFor="let proposition of propositions">
+            <ion-label>{{ proposition }}</ion-label>
+            <ion-radio slot="start" value="{{ proposition }}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-card-content>
+        <ion-button color="primary" (click)="next()" *ngIf="!backButton"
+          >Next</ion-button>
+        <ion-button color="primary" [routerLink]="['/home']"  *ngIf="backButton"
+          >Retour</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

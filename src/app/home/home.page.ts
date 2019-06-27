@@ -13,8 +13,11 @@ export class HomePage {
       this.getMaxScore(JSON.parse(localStorage.getItem('score')));
     }
   }
-  ionViewWillEnter() {
 
+  /**
+   * Utilisation de LifeCycle pour mettre à jour les données en localStorage
+   */
+  ionViewWillEnter() {
     if (localStorage.getItem('score') != null) {
       this.getMaxScore(JSON.parse(localStorage.getItem('score')));
     }

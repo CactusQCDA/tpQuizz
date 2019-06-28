@@ -31,6 +31,8 @@ export class QuizzPage implements OnInit {
   public propositions = [];
   private storedScores = [];
 
+  public countDown: number=10;
+
   constructor(private route: ActivatedRoute, private qs: QuizzserviceService, public alertController: AlertController) {
     this.route.params.subscribe(params => {
       this.nbOccurence = params["nb"];
@@ -49,6 +51,8 @@ export class QuizzPage implements OnInit {
     this.idQuestion = 0;
     this.cptQuestion = 1;
     this.getQuestion(this.idQuestion);
+
+    this.startTimer();
   }
 
   public getQuestion(id: number) {
@@ -180,6 +184,24 @@ export class QuizzPage implements OnInit {
     this.backButton = true;
     await alert.present();
   }
+
+  public startTimer() {
+
+    setInterval(function () {
+
+      console.log(this.countDown);
+      this.countDown-- ;
+
+
+      //seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      if (--this.countDown < 0) {
+        //timer = duration;
+      }
+      console.log(this.countDown);
+    }, 1000);
+  }
+
 
   ngOnInit() { }
 }

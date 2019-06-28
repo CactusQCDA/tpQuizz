@@ -27,7 +27,7 @@
       <ion-list>
         <ion-radio-group [(ngModel)]="itemSelected">
           <ion-list-header>
-            <ion-label>Réponse</ion-label>
+            <ion-label>Réponse {{ countDown}}</ion-label>
           </ion-list-header>
 
           <ion-item *ngFor="let proposition of propositions">

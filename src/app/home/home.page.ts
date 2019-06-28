@@ -29,7 +29,8 @@ export class HomePage {
    * @param tabScore Retourne la plus grande valeur d'un tableau d'entier passé en paramètre
    */
   public getMaxScore(tabScore) {
-    this.localScore = Math.max.apply(Math, tabScore);
+    if(tabScore != null){
+      this.localScore = Math.max.apply(Math, tabScore);
+    }
   }
-
 }

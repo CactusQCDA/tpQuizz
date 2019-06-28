@@ -11,12 +11,9 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
   },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  },
 
-  { path: 'quizz', loadChildren: './pages/quizz/quizz.module#QuizzPageModule' },  { path: 'eni', loadChildren: './pages/eni/eni.module#EniPageModule' },
+  { path: 'quizz', loadChildren: './pages/quizz/quizz.module#QuizzPageModule' },
+  { path: 'eni', loadChildren: './pages/eni/eni.module#EniPageModule' },
   { path: 'author', loadChildren: './pages/author/author.module#AuthorPageModule' }
 
 ];

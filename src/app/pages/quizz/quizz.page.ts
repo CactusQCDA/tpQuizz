@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { QuizzserviceService } from "../../service/quizzservice.service";
 import { Question } from "src/app/model/question";
-import { AlertController } from '@ionic/angular';
-import { parse } from 'querystring';
+import { AlertController } from "@ionic/angular";
+import { parse } from "querystring";
 
 @Component({
   selector: "app-quizz",
@@ -11,7 +11,6 @@ import { parse } from 'querystring';
   styleUrls: ["./quizz.page.scss"]
 })
 export class QuizzPage implements OnInit {
-
   private nbOccurence: string;
   private difficulty: string;
 
@@ -31,9 +30,13 @@ export class QuizzPage implements OnInit {
   public propositions = [];
   private storedScores = [];
 
-  public countDown: number=10;
+  public countDown: number = 10;
 
-  constructor(private route: ActivatedRoute, private qs: QuizzserviceService, public alertController: AlertController) {
+  constructor(
+    private route: ActivatedRoute,
+    private qs: QuizzserviceService,
+    public alertController: AlertController
+  ) {
     this.route.params.subscribe(params => {
       this.nbOccurence = params["nb"];
       this.difficulty = params["diff"];
@@ -46,21 +49,21 @@ export class QuizzPage implements OnInit {
   }
 
   async chargerListeQuestion(nb: string, diff: string) {
+
     this.questions = await this.qs.getQuestions(nb, diff);
 
     this.idQuestion = 0;
     this.cptQuestion = 1;
     this.getQuestion(this.idQuestion);
 
-    this.startTimer();
   }
 
   public getQuestion(id: number) {
     this.radioDisable = false;
-    if (id != (this.questions.length)) {
-      // Application de la couleur par défaut aux radio-button 
+    if (id != this.questions.length) {
+      // Application de la couleur par défaut aux radio-button
       // (cas où ceux-ci auraient changés lors de la question précédente)
-      this.colorReponse = 'dark';
+      this.colorReponse = "dark";
 
       // récupe de la question depuis le tableau de questions
       this.questionSelect = this.questions[id];
@@ -91,36 +94,33 @@ export class QuizzPage implements OnInit {
     // Rendre disable les radio-button
     this.radioDisable = true;
   }
+  
   /**
    * Methode qui gère le boutton next.
    */
   public next() {
     if (this.itemSelected) {
-
       // Si bonne réponse implémentation du score du joueur
-      if (this.itemSelected === this.questions[this.idQuestion].correct_answer) {
+      if (
+        this.itemSelected === this.questions[this.idQuestion].correct_answer
+      ) {
         this.score++;
         // si bonne réponse changement de couleur du radio button
-        this.colorReponse = 'success';
+        this.colorReponse = "success";
         // Incrémentation du compteur question
         ++this.cptQuestion;
       } else {
-        this.colorReponse = 'danger';
+        this.colorReponse = "danger";
         // Incrémentation du compteur question
         ++this.cptQuestion;
       }
       if (this.idQuestion != this.questions.length - 1) {
         // On passe à la question suivante àprès un petit delai de 1s histoire
-        // d'avoir le temps de voir si on a réussi ou pas grâce au changement de couleur de 
+        // d'avoir le temps de voir si on a réussi ou pas grâce au changement de couleur de
         // la réponse
-        setTimeout(() =>
-          this.getQuestion(++this.idQuestion)
-          , 1000);
-
+        setTimeout(() => this.getQuestion(++this.idQuestion), 1000);
       } else {
-        setTimeout(() =>
-          this.presentAlert()
-          , 1000);
+        setTimeout(() => this.presentAlert(), 1000);
       }
     }
   }
@@ -146,62 +146,48 @@ export class QuizzPage implements OnInit {
    */
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Resultat',
-      subHeader: 'Score',
-      buttons: ['OK']
+      header: "Resultat",
+      subHeader: "Score",
+      buttons: ["OK"]
     });
 
     // Message personnalisé en fonction des résultats
-    let indice = (Number(this.nbOccurence) / this.score);
+    let indice = Number(this.nbOccurence) / this.score;
     if (indice == 1) {
-      alert.setAttribute('message', `Score : ${Number(this.score)} Waou PERFECT !!!`);
+      alert.setAttribute(
+        "message",
+        `Score : ${Number(this.score)} Waou PERFECT !!!`
+      );
     }
     if (indice > 1 && indice < 2) {
-      alert.setAttribute('message', `Score : ${Number(this.score)} Bravo !!!`);
+      alert.setAttribute("message", `Score : ${Number(this.score)} Bravo !!!`);
     }
     if (indice >= 2 && indice < 3) {
-      alert.setAttribute('message', `Score : ${Number(this.score)} Pas mal !`);
+      alert.setAttribute("message", `Score : ${Number(this.score)} Pas mal !`);
     }
     if (indice >= 3) {
-      alert.setAttribute('message', `Score : ${Number(this.score)} Il faut encore s\'entraîner !`);
+      alert.setAttribute(
+        "message",
+        `Score : ${Number(this.score)} Il faut encore s\'entraîner !`
+      );
     }
 
     /**
      *  Enregistrement du score en mémoire (localStorage)
      */
     // Si un score a déjà été sauvegardé alors on récupère le tableau
-    if (localStorage.getItem('score') != null) {
-      let scoreRegistered = JSON.parse(localStorage.getItem('score'));
+    if (localStorage.getItem("score") != null) {
+      let scoreRegistered = JSON.parse(localStorage.getItem("score"));
       this.storedScores = scoreRegistered;
     }
     // Ajout de la valeur du score dans le tableau historique des scores
     this.storedScores.push(this.score);
     localStorage.setItem("score", JSON.stringify(this.storedScores));
 
-
-
     // Permettre désormais le retour à la page d'accueil.
     this.backButton = true;
     await alert.present();
   }
 
-  public startTimer() {
-
-    setInterval(function () {
-
-      console.log(this.countDown);
-      this.countDown-- ;
-
-
-      //seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      if (--this.countDown < 0) {
-        //timer = duration;
-      }
-      console.log(this.countDown);
-    }, 1000);
-  }
-
-
-  ngOnInit() { }
+  ngOnInit() {}
 }

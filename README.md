@@ -1,5 +1,9 @@
 ## tp Quizz
-Application developpée sous Ionic
+tp - ENI 2018/2019
+Application developpée sous Ionic.
+- Mon developpement ne prends pas en compte l'implémentation d'un compte à rebours ... 
+- Je suis parti d'un projet side-page plutôt que d'un projet blank.
+
 
 ### Objectif
 
